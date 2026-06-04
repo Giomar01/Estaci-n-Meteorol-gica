@@ -21,3 +21,29 @@ public:
      * @param lcd Puntero a la pantalla LCD que utilizará el sistema para mostrar datos.
      */
     EstacionMeteorologica(int capacidadMax, PantallaLCD* lcd);
+
+    /**
+     * @brief Destructor encargado de liberar adecuadamente toda la memoria dinámica.
+     * @note Borra de manera individual cada objeto sensor almacenado en el heap mediante 'delete'.
+     */
+    ~EstacionMeteorologica();
+    /**
+     * @brief Agrega dinámicamente un nuevo sensor al arreglo de la estación.
+     * @param nuevoSensor Puntero de tipo Sensor.
+     * @return true si el sensor se agregó con éxito, false si el arreglo está lleno.
+     */
+    bool agregarSensor(Sensor* nuevoSensor);
+
+    /**
+     * @brief Actualiza de manera secuencial las lecturas de todos los sensores registrados.
+     * @note Aplica polimorfismo dinámico al invocar leerDatos().
+     */
+    void actualizarMediciones();
+
+    /**
+     * @brief Procesa y envía los datos recolectados hacia el objeto PantallaLCD.
+     */
+    void mostrarEnLCD();
+};
+
+#endif
