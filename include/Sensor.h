@@ -45,4 +45,5 @@ class Sensor {
     virtual void leerDatos() = 0;
 
 };
+
 #endif
