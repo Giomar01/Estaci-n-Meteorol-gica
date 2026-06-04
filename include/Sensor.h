@@ -20,7 +20,7 @@ class Sensor {
      */
     Sensor(int pin, string tipo);
 
-    virtual ~Sensor();
+    virtual ~Sensor() = default;
     /**
      * @brief Obtiene el pin de conexión del sensor.
      * @return Entero que representa el pin.
