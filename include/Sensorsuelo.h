@@ -22,3 +22,23 @@ public:
      * @brief Destructor de SensorSuelo.
      */
     ~SensorSuelo() override;
+
+    /**
+     * @brief Obtiene la humedad del suelo medida.
+     * @return Porcentaje de humedad (0% - 100%).
+     */
+    float getHumedadSuelo() const;
+
+    /**
+     * @brief Establece el valor de humedad del suelo.
+     * @param humedad Porcentaje de humedad.
+     */
+    void setHumedadSuelo(float humedad);
+
+    /**
+     * @brief Lee la entrada analógica y calcula el porcentaje de humedad del suelo.
+     */
+    void leerDatos() override;
+};
+
+#endif
