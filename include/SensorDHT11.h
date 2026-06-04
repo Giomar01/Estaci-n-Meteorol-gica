@@ -19,14 +19,40 @@ private:
      * @param _pin Pin físico al que está conectado el sensor.
      */
     SensorDHT11(int pin);
-    
+    /**
+    * @brief Lee los datos del sensor DHT11.
+    *
+    * Obtiene los valores actuales de temperatura y humedad
+    * almacenándolos en los atributos correspondientes.
+    */
     void leerDatos() override;
-
+    /**
+    * @brief Obtiene la temperatura medida por el sensor.
+    *
+    * Realiza una lectura de temperatura desde el DHT11.
+    *
+    * @return Temperatura en grados Celsius (°C).
+    */
     float leerTemperatura();
+    /**
+    * @brief Obtiene la humedad relativa medida por el sensor.
+    *
+    * Realiza una lectura de humedad desde el DHT11.
+    *
+    * @return Humedad relativa en porcentaje (%).
+    */
     float leerHumedad();
-
+    /**
+    * @brief Retorna el último valor de temperatura almacenado.
+    *
+    * @return Temperatura en grados Celsius (°C).
+    */
     float getTemperatura();
-
+    /**
+    * @brief Retorna el último valor de humedad almacenado.
+    *
+    * @return Humedad relativa en porcentaje (%).
+    */
     float getHumedad();
 };
 
