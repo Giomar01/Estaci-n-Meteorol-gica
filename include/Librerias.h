@@ -4,6 +4,11 @@
 
 #define LIBRERIAS_H
 
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+#include <Adafruit_Sensor.h>
+#include <DHT.h>
+
 // Declaraciones de librerias y elementos globales para el proyecto
 
 #include <iostream>
