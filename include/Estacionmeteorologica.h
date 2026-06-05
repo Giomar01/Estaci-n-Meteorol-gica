@@ -1,4 +1,5 @@
 #ifndef ESTACIONMETEOROLOGICA_H
+
 #define ESTACIONMETEOROLOGICA_H
 
 #include "Sensor.h"
@@ -6,44 +7,46 @@
 
 /**
  * @class EstacionMeteorologica
- * @brief Clase de alto nivel encargada de orquestar los sensores y la salida de datos.
+ * @brief Clase de alto nivel encargada de dirigir a los sensores y la salida de datos.
  */
 class EstacionMeteorologica {
-private:
-    Sensor** listaSensores;     
-    int cantidadSensores;    
-    int capacidadMax;   
-    PantallaLCD* lcd;
-public:
-    /**
-     * @brief Constructor de la EstacionMeteorologica.
-     * @param capacidadMax Capacidad máxima del arreglo dinámico de sensores.
-     * @param lcd Puntero a la pantalla LCD que utilizará el sistema para mostrar datos.
-     */
-    EstacionMeteorologica(int capacidadMax, PantallaLCD* lcd);
+    private:
+        Sensor** listaSensores;     
+        int cantidadSensores;    
+        int capacidadMax;   
+        PantallaLCD* lcd;
 
-    /**
-     * @brief Destructor encargado de liberar adecuadamente toda la memoria dinámica.
-     * @note Borra de manera individual cada objeto sensor almacenado en el heap mediante 'delete'.
-     */
-    ~EstacionMeteorologica();
-    /**
-     * @brief Agrega dinámicamente un nuevo sensor al arreglo de la estación.
-     * @param nuevoSensor Puntero de tipo Sensor.
-     * @return true si el sensor se agregó con éxito, false si el arreglo está lleno.
-     */
-    bool agregarSensor(Sensor* nuevoSensor);
+    public:
+        /**
+         * @brief Constructor de la EstacionMeteorologica.
+         * @param capacidadMax Capacidad máxima del vector dinámico de sensores.
+         * @param lcd Puntero a la pantalla LCD que utilizará el sistema para mostrar datos.
+         */
+        EstacionMeteorologica(int capacidadMax, PantallaLCD* lcd);
 
-    /**
-     * @brief Actualiza de manera secuencial las lecturas de todos los sensores registrados.
-     * @note Aplica polimorfismo dinámico al invocar leerDatos().
-     */
-    void actualizarMediciones();
+        /**
+         * @brief Destructor encargado de liberar adecuadamente toda la memoria dinámica.
+         * @note Borra de manera individual cada objeto sensor almacenado en el heap mediante 'delete'.
+         */
+        ~EstacionMeteorologica();
 
-    /**
-     * @brief Procesa y envía los datos recolectados hacia el objeto PantallaLCD.
-     */
-    void mostrarEnLCD();
-};
+        /**
+         * @brief Agrega dinámicamente un nuevo sensor al arreglo de la estación.
+         * @param nuevoSensor Puntero de tipo Sensor.
+         * @return true si el sensor se agregó con éxito, false si el arreglo está lleno.
+         */
+        bool agregarSensor(Sensor* nuevoSensor);
+
+        /**
+         * @brief Actualiza de manera secuencial las lecturas de todos los sensores registrados.
+         * @note Aplica polimorfismo dinámico al invocar leerDatos().
+         */
+        void actualizarMediciones();
+
+        /**
+         * @brief Procesa y envía los datos recolectados hacia el objeto PantallaLCD.
+         */
+        void mostrarEnLCD();
+    };
 
 #endif

@@ -1,7 +1,6 @@
 #include "Sensor.h"
 
-Sensor::Sensor(int pin, string tipo)
-{
+Sensor::Sensor(int pin, string tipo) {
     this->pin = pin;
     this->tipoSensor = tipo;
 }

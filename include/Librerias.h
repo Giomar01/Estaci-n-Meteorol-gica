@@ -1,23 +1,27 @@
 #ifndef LIBRERIAS_H
 
-// Se definen las librerias y elementos globales para llevar a cabo el desarrollo del proyecto
-
 #define LIBRERIAS_H
 
+#include <Arduino.h>
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 #include <Adafruit_Sensor.h>
 #include <DHT.h>
 
-// Declaraciones de librerias y elementos globales para el proyecto
-
 #include <iostream>
 #include <string>
 #include <vector>
 #include <cmath>
-// Uso de espacios de nombres para facilitar la escritura del código profe :3
+
 using std::string;
 using std::vector;
 
+// Declaraciones de clases a utilizar adelantadas para evitar errores de tipo en los vectores globales
+class Sensor;
+class SensorAmbiental;
+class SensorSuelo;
+class SensorLuz;
+class SensorAire;
+class PantallaLCD;
 
 #endif
