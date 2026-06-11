@@ -10,11 +10,12 @@
  * @brief Clase de alto nivel encargada de dirigir a los sensores y la salida de datos.
  */
 class EstacionMeteorologica {
-    private:
+    protected:
         Sensor** listaSensores;     
         int cantidadSensores;    
         int capacidadMax;   
         PantallaLCD* lcd;
+        int indiceActual;
 
     public:
         /**
@@ -47,6 +48,22 @@ class EstacionMeteorologica {
          * @brief Procesa y envía los datos recolectados hacia el objeto PantallaLCD.
          */
         void mostrarEnLCD();
+
+        /**
+         * @brief Mueve el índice al siguiente sensor en la lista.
+         * 
+         */
+        void siguienteSensor();
+
+        /**
+         * @brief Mueve el índice al sensor anterior en la lista.
+         */
+        void anteriorSensor();
+
+        /**
+         * @brief Muestra los datos del sensor actual en la pantalla LCD.
+         */
+        void mostrarSensorActual();
     };
 
 #endif

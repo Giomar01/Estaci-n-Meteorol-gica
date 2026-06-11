@@ -31,7 +31,7 @@ void SensorLuz::leerDatos() {
     // Conversión del valor analógico a porcentaje de luz
     // La función map() asigna los valores según el rango del sensor
     // Se está suponiendo que 4095 es "muy iluminado" y 0 es "oscuridad"
-    this->porcentajeLuz = map(valorAnalogico, 0, 4095, 0, 100); 
+    this->porcentajeLuz = map(valorAnalogico, 4095, 0, 0, 100);
 
     // Limita que el valor esté entre 0 y 100 por seguridad
     this->porcentajeLuz = constrain(this->porcentajeLuz, 0, 100); 

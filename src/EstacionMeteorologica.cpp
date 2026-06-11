@@ -7,6 +7,7 @@ EstacionMeteorologica::EstacionMeteorologica(int capacidadMax, PantallaLCD* lcd)
     this->cantidadSensores = 0;
     this->listaSensores = new Sensor*[capacidadMax]; // Reserva memoria para el arreglo de punteros a sensores
     this->lcd = lcd;
+    this->indiceActual = 0;
 }
 
 EstacionMeteorologica::~EstacionMeteorologica() {
@@ -45,4 +46,17 @@ void EstacionMeteorologica::mostrarEnLCD() {
         // Pausa 2 segundos entre cada sensor para permitir la lectura antes de mostrar el siguiente
         delay(2000);        
     }
+}
+
+void EstacionMeteorologica::siguienteSensor() {
+    indiceActual = (indiceActual + 1) % cantidadSensores;
+}
+
+void EstacionMeteorologica::anteriorSensor() {
+    indiceActual = (indiceActual - 1 + cantidadSensores) % cantidadSensores;
+}
+
+void EstacionMeteorologica::mostrarSensorActual() {
+    lcd->mostrarSensor(listaSensores[indiceActual]->getTipoSensor(), 
+                       listaSensores[indiceActual]->obtenerDatosFormateados());
 }

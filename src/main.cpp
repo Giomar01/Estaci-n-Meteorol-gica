@@ -9,29 +9,52 @@
 PantallaLCD* pantallaLCD = nullptr;
 EstacionMeteorologica* estacionMetereologica = nullptr;
 
+// Definición de pines
+const int BTN_IZQ = 18;
+const int BTN_DER = 19;
+
 void setup() {
   Serial.begin(115200);
 
-  // 2. Inicialización de la pantalla LCD y la estación meteorológica
+  // 2. Inicialización de la pantalla LCD, la estación meteorológica y pines de botones
     pantallaLCD = new PantallaLCD(0x27, 16, 2);
     pantallaLCD->inicializar();
     pantallaLCD->mostrarMensaje("Iniciando...", "Iniciando...");
 
+    pinMode(BTN_IZQ, INPUT_PULLUP);
+    pinMode(BTN_DER, INPUT_PULLUP);
+
     estacionMetereologica = new EstacionMeteorologica(4, pantallaLCD);
 
     // 3. Creación de los sensores en la memoria 'heap' de la estación
-    estacionMetereologica->agregarSensor(new SensorAmbiental(2)); // Pin digital DHT11
-    estacionMetereologica->agregarSensor(new SensorSuelo(34));    // Pin analógico
-    estacionMetereologica->agregarSensor(new SensorAire(35));     // Pin analógico
+    estacionMetereologica->agregarSensor(new SensorAmbiental(4)); // Pin digital DHT11
+    estacionMetereologica->agregarSensor(new SensorSuelo(35));    // Pin analógico
+    estacionMetereologica->agregarSensor(new SensorAire(34));     // Pin analógico
     estacionMetereologica->agregarSensor(new SensorLuz(33));      // Pin analógico
     
     delay(2000);
 }
 
 void loop() {
-    // 4. Actualización de las mediciones de los sensores y su visualización en la LCD
-    estacionMetereologica->actualizarMediciones();
-    estacionMetereologica->mostrarEnLCD();
     
-    delay(5000); // Espera 5 segundos antes de la siguiente actualización
+    // 4. Actualización de las mediciones y lectura de botones (LOW significa presionado por el PULLUP)
+    if (digitalRead(BTN_IZQ) == LOW) {
+        estacionMetereologica->anteriorSensor();
+        estacionMetereologica->mostrarSensorActual();
+        delay(300); // Debounce simple para evitar rebotes
+    }
+    
+    if (digitalRead(BTN_DER) == LOW) {
+        estacionMetereologica->siguienteSensor();
+        estacionMetereologica->mostrarSensorActual();
+        delay(300);
+    }
+    
+    // Actualizar mediciones periódicamente sin cambiar de pantalla
+    static unsigned long ultimaActualizacion = 0;
+    if (millis() - ultimaActualizacion > 3000) { // Actualiza cada 3 segundos
+        estacionMetereologica->actualizarMediciones();
+        estacionMetereologica->mostrarSensorActual(); // Refresca los datos en pantalla
+        ultimaActualizacion = millis();
+    }
 }
