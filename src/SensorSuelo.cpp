@@ -19,9 +19,6 @@ void SensorSuelo::setHumedadSuelo(float humedad) {
 void SensorSuelo::leerDatos() {
     // Lectura del valor analógico del sensor de humedad del suelo
     int valorAnalogico = analogRead(this->pin);
-
-    Serial.print("Valor analogico: ");
-    Serial.println(valorAnalogico);
     
     // Conversión del valor analógico a porcentaje de humedad
     // La función map() asigna los valores según el rango del sensor
@@ -29,11 +26,16 @@ void SensorSuelo::leerDatos() {
     this->humedadSuelo = map(valorAnalogico, 4095, 0, 0, 100);
 
     // Limita que el valor esté entre 0 y 100 por seguridad
-    this->humedadSuelo = constrain(this->humedadSuelo, 0, 100); 
+    this->humedadSuelo = constrain(this->humedadSuelo, 0, 100);
+
+    // Impresión Serial
+    Serial.print("Humedad Suelo: ");
+    Serial.print(getHumedadSuelo());
+    Serial.println(" %");
 }
 
 string SensorSuelo::obtenerDatosFormateados() {
     char buffer[30];
-    sprintf(buffer, "H(S): %.2f%%", this->humedadSuelo);
+    sprintf(buffer, "H(S): %.1f%%", this->humedadSuelo);
     return string(buffer);
 }

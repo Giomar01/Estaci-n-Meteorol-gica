@@ -34,11 +34,16 @@ void SensorLuz::leerDatos() {
     this->porcentajeLuz = map(valorAnalogico, 4095, 0, 0, 100);
 
     // Limita que el valor esté entre 0 y 100 por seguridad
-    this->porcentajeLuz = constrain(this->porcentajeLuz, 0, 100); 
+    this->porcentajeLuz = constrain(this->porcentajeLuz, 0, 100);
+
+    // Impresión Serial
+    Serial.print("Intensidad Luminica: ");
+    Serial.print(getPorcentajeLuz());
+    Serial.println(" %");
 }
 
 string SensorLuz::obtenerDatosFormateados() {
     char buffer[30];
-    sprintf(buffer, "L: %.2f%%", this->porcentajeLuz);
+    sprintf(buffer, "L: %.1f%%", this->porcentajeLuz);
     return string(buffer);
 }

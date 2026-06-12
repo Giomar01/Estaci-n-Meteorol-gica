@@ -23,10 +23,15 @@ void SensorAire::leerDatos() {
     // En este caso, se toma un rango de 0-1023 que corresponde a 0-500 ppm:
 
     this->ppmCalidad = (valorAnalogico / 1023.0) * 500.0;
+
+    // Impresión Serial
+    Serial.print("Calidad del Aire: ");
+    Serial.print(getPpmCalidad());
+    Serial.println(" ppm");
 }
 
 string SensorAire::obtenerDatosFormateados() {
     char buffer[30];
-    sprintf(buffer, "A: %.2f ppm", this->ppmCalidad);
+    sprintf(buffer, "A: %.1f ppm", this->ppmCalidad);
     return string(buffer);
 }

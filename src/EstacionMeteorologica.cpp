@@ -32,9 +32,13 @@ bool EstacionMeteorologica::agregarSensor(Sensor* nuevoSensor) {
 }
 
 void EstacionMeteorologica::actualizarMediciones() {
+    Serial.println("Mediciones:");
+
     for (int i = 0; i < cantidadSensores; i++) {
+        Serial.println("-------------------------------------");
         listaSensores[i]->leerDatos(); // Invoca el método leerDatos() de cada sensor
     }
+    Serial.println("-------------------------------------");
 }
 
 void EstacionMeteorologica::mostrarEnLCD() {

@@ -30,24 +30,29 @@ void SensorAmbiental::leerDatos() {
     // Lectura de valores mediante pin digital del sensor DHT11
     float h = dht.readHumidity();
     float t = dht.readTemperature();
-
-    Serial.print("Humedad: ");
-    Serial.print(h);
-    Serial.print(" Temperatura: ");
-    Serial.println(t);
     
+    this->setHumedad(h);
+    this->setTemperatura(t);
+
+    if (getTemperatura() && getHumedad()) {
+        // Impresión Serial
+        Serial.print("Temperatura: ");
+        Serial.print(getTemperatura());
+        Serial.println(" °C");
+        Serial.print("Humedad Ambiental: ");
+        Serial.print(getHumedad());
+        Serial.println(" %");
+    }
+
     // Verificación de lecturas válidas
     if (isnan(h) || isnan(t)) {
         Serial.println("Error en la lectura del sensor DHT11");
         return;
     }
-
-    this->setHumedad(h);
-    this->setTemperatura(t);
 }
 
 string SensorAmbiental::obtenerDatosFormateados() {
     char buffer[30];
-    sprintf(buffer, "T: %.1f H: %.1f", this->temperatura, this->humedad);
+    sprintf(buffer, "T: %.1f H: %.0f%%", this->temperatura, this->humedad);
     return string(buffer);
 }
