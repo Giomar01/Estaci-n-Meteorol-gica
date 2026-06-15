@@ -14,9 +14,9 @@ const int BTN_IZQ = 18;
 const int BTN_DER = 19;
 
 void setup() {
-  Serial.begin(115200);
+    Serial.begin(115200);
 
-  // 2. Inicialización de la pantalla LCD, la estación meteorológica y pines de botones
+    // 2. Inicialización de la pantalla LCD, la estación meteorológica y pines de botones
     pantallaLCD = new PantallaLCD(0x27, 16, 2);
     pantallaLCD->inicializar();
     pantallaLCD->mostrarMensaje("Iniciando...", "Iniciando...");
@@ -50,8 +50,9 @@ void loop() {
         delay(300);
     }
     
-    // Actualizar mediciones periódicamente sin cambiar de pantalla
+    // 5. Actualizar mediciones periódicamente sin cambiar de pantalla
     static unsigned long ultimaActualizacion = 0;
+    
     if (millis() - ultimaActualizacion > 2000) { // Actualiza cada 2 segundos
         estacionMetereologica->actualizarMediciones();
         estacionMetereologica->mostrarSensorActual(); // Refresca los datos en pantalla
