@@ -28,9 +28,9 @@ void setup() {
 
     // 3. Creación de los sensores en la memoria 'heap' de la estación
     estacionMetereologica->agregarSensor(new SensorAmbiental(4)); // Pin digital DHT11
-    estacionMetereologica->agregarSensor(new SensorSuelo(33));    // Pin analógico
-    estacionMetereologica->agregarSensor(new SensorAire(34));     // Pin analógico
-    estacionMetereologica->agregarSensor(new SensorLuz(35));      // Pin digital LDR
+    estacionMetereologica->agregarSensor(new SensorSuelo(34));    // Pin analógico HC69
+    estacionMetereologica->agregarSensor(new SensorAire(35));     // Pin analógico MQ135
+    estacionMetereologica->agregarSensor(new SensorLuz(33));      // Pin digital LDR
     
     delay(2000);
 }

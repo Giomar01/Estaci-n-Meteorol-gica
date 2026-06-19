@@ -22,7 +22,7 @@ void SensorAire::leerDatos() {
     // Se implementa una fórmula de calibración específica para el sensor de aire
     // En este caso, se toma un rango de 0-1023 que corresponde a 0-500 ppm:
 
-    this->ppmCalidad = (valorAnalogico / 1023.0) * 500.0;
+    this->ppmCalidad = (valorAnalogico / 1023.0) * 5000;
 
     // Impresión Serial
     Serial.print("Calidad del Aire: ");
